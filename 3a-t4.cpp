@@ -1,5 +1,5 @@
 #include<iostream> 
-#include<limits> // for numeric_limits
+#include<limits> 
 using namespace std;
 
 int main()
