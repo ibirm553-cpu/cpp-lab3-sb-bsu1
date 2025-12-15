@@ -1,27 +1,46 @@
-#include <iostream>
+#include<iostream> 
+#include<limits> // for numeric_limits
 using namespace std;
 
-int main() {
+int main()
+{
     int k, i = 1, sum_k = 0, number;
 
+    // Get the amount of integers to sum with validation
     cout << "Enter the amount of integers to sum = ";
-    cin >> k;
-    if (k <= 0) {
-        cout << "It's impossible to count." << endl;
-        return 0; 
+    while (!(cin >> k)) {
+        cout << "Invalid input! Please enter an integer: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    do {
-        cout << "Enter integer nr. " << i << ": ";
-        while (!(cin >> number)) { 
-            cout << "Invalid input. Please enter an integer: ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-        }
-        sum_k += number;
-        i++;
-    } while (i <= k);
+    // Use if statement to handle different cases for k
+    if (k > 0) {
+        cout << "You will be prompted to enter " << k << " integers." << endl;
 
-    cout << "The total sum of " << k << " integers is: " << sum_k << endl;
+        do {
+            cout << "Enter integer nr. " << i << ": ";
+
+            // Input validation for each integer
+            while (!(cin >> number)) {
+                cout << "Invalid input! Please enter an integer: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+
+            sum_k += number;
+            i++;
+        } while (i <= k);
+
+        cout << "The total sum of " << k << " integers is: " << sum_k << endl;
+    }
+    else if (k == 0) {
+        cout << "No integers to sum. The sum is 0." << endl;
+    }
+    else {
+        cout << "Invalid input! Amount cannot be negative." << endl;
+        return 1;
+    }
+
     return 0;
 }
